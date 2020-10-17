@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+
+
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        <h2>My blog</h2>
+        <p>This is my blog</p>
+        <div><a href="{% url 'blog:create_post' %}">Create post</a></div>
+        <div>
+        {% if user.is_authenticated %}
+            <button><a href="{% url 'logout' %}">Log Out</a></button>
+            <button><a href="{% url 'password_change' %}">Change password</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a>
+            <p><a href="{% url 'password_reset' %}">Forgotten your password</a></p>
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>
